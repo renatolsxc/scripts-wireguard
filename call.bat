@@ -1,0 +1,2 @@
+start powershell.exe -WindowStyle Hidden -File "C:\Program Files\WireGuard\monitorar.ps1"
+wmic process where "commandline like '%%[m]onitorar.ps1%%'" get processid | findstr/n ^^|findstr "[2]:" > "c:\Program Files\WireGuard\pid.txt"
