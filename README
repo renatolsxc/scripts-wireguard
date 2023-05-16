@@ -11,3 +11,7 @@ o arquivo monitorar.ps1 foi feito em powershell para monitorar a vpn wireguard e
 o arquivo pingwg.py está configurado no cron do servidor ubuntu 22.04 proxy zabbix instalado na loja 1 para monitorar outros sites ele está monitorando as duas vpns e reinicia o serviço de wireguard caso o ping falhe. não há mudanças de endpoint. apenas reinicio de serviço caso falhe.
 
 o arquivo start.bat foi feito para chamar em background e salvar o arquivo de log do monitoramento check-wggalpao.py
+
+
+próximas versões
+- preciso melhorar o script que monitora o wg por ping para validar se o computador que roda o script possui internet. pois se ele nao tem internet ele não consegue fechar a vpn. testar ping, testar dns, testar velocidade, jitter e atraso.
