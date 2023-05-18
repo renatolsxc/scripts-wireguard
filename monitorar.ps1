@@ -1,5 +1,6 @@
 ﻿# Função para verificar a operadora atual
 Start-Transcript -Path "C:\Program Files\WireGuard\log.txt" -Append
+ip-principal = "192.168.0.0"
 
 function verificaopatual() {
 	try {
@@ -8,7 +9,7 @@ function verificaopatual() {
             $parts = ($output.Line -split ":")[0]
             $parts = ($parts -split "= ")[1] 
 			switch ($parts) {
-				"ip-principal" { return 1 }
+				ip-principal { return 1 }
 				default {
 					if ($parts -ne "") {
 						return 2
