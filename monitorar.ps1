@@ -8,7 +8,7 @@ function verificaopatual() {
             $parts = ($output.Line -split ":")[0]
             $parts = ($parts -split "= ")[1] 
 			switch ($parts) {
-				"200.169.14.155" { return 1 }
+				"ip-principal" { return 1 }
 				default {
 					if ($parts -ne "") {
 						return 2
@@ -62,14 +62,14 @@ while ($true) {
 				1 {
 					$dateString = Get-Date -Format 'yyyy-MM-dd_HH:mm:ss'
 					Write-Host $dateString "- Trocar para operadora 2"
-					$cmdTroca = "wg set wggalpao peer 6TYMXmghs5vQZ3B+CoZdvxFwXIDeP+pdPHwvZ+e1ekM= endpoint dleite2.ddns.net:44990"
+					$cmdTroca = "wg set wggalpao peer chave-publica-do-peer endpoint dominio.ddns.net:44990"
 					Invoke-Expression $cmdTroca
 					Start-Sleep -Seconds 10
 				}
 				2 {
 					$dateString = Get-Date -Format 'yyyy-MM-dd_HH:mm:ss'
 					Write-Host $dateString "- Trocar para operadora 1"
-					$cmdTroca = "wg set wggalpao peer 6TYMXmghs5vQZ3B+CoZdvxFwXIDeP+pdPHwvZ+e1ekM= endpoint dleite.ddns.net:44990"
+					$cmdTroca = "wg set wggalpao peer chave-publica-do-peer endpoint dominio.ddns.net:44990"
 					Invoke-Expression $cmdTroca
 					Start-Sleep -Seconds 10
 				}
