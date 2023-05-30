@@ -14,4 +14,31 @@ o arquivo start.bat foi feito para chamar em background e salvar o arquivo de lo
 
 
 próximas versões
+- preciso fazer criar um serviço para monitorar o tunnel service, abandonar a opção de scripts de inicialização e desligamento
+- criando um serviço que se inicia de forma dependente do tcp/ip do windows
+- ele vai monitorar o serviço da seguinte forma:
+C:\Users\Usuario>sc query WireGuardTunnel$wggalpao
+
+NOME_DO_SERVIÇO: WireGuardTunnel$wggalpao
+    TIPO                       : 10  WIN32_OWN_PROCESS
+    ESTADO                     : 4  RUNNING
+                                (STOPPABLE, NOT_PAUSABLE, ACCEPTS_SHUTDOWN)
+    CÓDIGO_DE_SAÍDA_DO_WIN32   : 0  (0x0)
+    CÓDIGO_DE_SAÍDA_DO_SERVIÇO : 0  (0x0)
+    PONTO_DE_VERIFICAÇÃO       : 0x0
+    AGUARDAR_DICA              : 0x0
+
+se estiver running e não estiver pingando tomar alguma ação, trocar de operadora, por exemplo.
+se não estiver running executar
+wireguard /installtunnelservice "c:\Program Files\WireGuard\Data\Configurations\wggalpao.conf.dpapi"
+para instalar o tunnel interface service
+
+se tentar trocar a operadora com o seguinte comando
+C:\Users\Usuario>wg set wggalpao peer 6TYMXmghs5vQZ3B+hashhash+pdPHwvZ+e1ekM= endpoint ippublico.ddns.net:51028
+Unable to modify interface: No such file or directory
+o serviço não está ligado ou não existe um servico do tipo WireGuardTunnel$
+então preciso criar o serviço.
+
+preciso decidir o que monitorar primeiro e como fazer esse monitoramento virar um serviço
+
 - preciso melhorar o script que monitora o wg por ping para validar se o computador que roda o script possui internet. pois se ele nao tem internet ele não consegue fechar a vpn. testar ping, testar dns, testar velocidade, jitter e atraso.
