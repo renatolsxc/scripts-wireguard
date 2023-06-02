@@ -37,21 +37,3 @@ after generating the exe file, it must be copied to the machines that close the 
 
 - linkedin: https://www.linkedin.com/in/silvarenatolopes/
 
-
-# Other things
-
-o arquivo call.bat está configuado para chamar o arquivo monitorar.ps1
-
-o arquivo check-wggalpao.py foi feito para monitorar a vpn usando o linguagem python e trocar de endpoint caso o primeiro falhe
-
-o arquivo checkwg.py foi feito em python para testar o arquivo wg0.conf dentro da pasta /etc e monitorar o latest-handshake
-
-o arquivo desligar.bat e desligar.vbs foram feitos para desligar o monitoramento da vpn wireguard
-
-o arquivo monitorar.ps1 foi feito em powershell para monitorar a vpn wireguard e trocar de endpoint caso o primeiro falhe
-
-o arquivo pingwg.py está configurado no cron do servidor ubuntu 22.04 proxy zabbix instalado na loja 1 para monitorar outros sites ele está monitorando as duas vpns e reinicia o serviço de wireguard caso o ping falhe. não há mudanças de endpoint. apenas reinicio de serviço caso falhe.
-
-o arquivo start.bat foi feito para chamar em background e salvar o arquivo de log do monitoramento check-wggalpao.py
-
-- preciso melhorar o script que monitora o wg por ping para validar se o computador que roda o script possui internet. pois se ele nao tem internet ele não consegue fechar a vpn. testar ping, testar dns, testar velocidade, jitter e atraso.
