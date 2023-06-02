@@ -8,7 +8,6 @@ def gerar_numero_aleatorio():
 # Exemplo de uso
 numero_aleatorio = gerar_numero_aleatorio()
 numero_aleatorio = (int) (numero_aleatorio*10)
-print(f"asdasda - {numero_aleatorio}")
 
 
 # Configurações do servidor Zabbix
