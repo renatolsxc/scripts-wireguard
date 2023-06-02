@@ -29,8 +29,7 @@ after generating the exe file, it must be copied to the machines that close the 
 - copy the file to the folder you want
 - open cmd with administrative permissions
 - walk to the folder where the exe is
-- file.exe install
-- file.exe start
+- check_wggalpao_service.exe --startup delayed install
 
 
 ## About me
