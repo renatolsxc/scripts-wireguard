@@ -40,5 +40,5 @@ o serviço não está ligado ou não existe um servico do tipo WireGuardTunnel$
 então preciso criar o serviço.
 
 preciso decidir o que monitorar primeiro e como fazer esse monitoramento virar um serviço
-
+"c:\Program Files\Python310\python.exe" -m PyInstaller --onefile --hidden-import=win32timezone check.py
 - preciso melhorar o script que monitora o wg por ping para validar se o computador que roda o script possui internet. pois se ele nao tem internet ele não consegue fechar a vpn. testar ping, testar dns, testar velocidade, jitter e atraso.
