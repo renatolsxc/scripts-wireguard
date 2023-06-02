@@ -1,10 +1,24 @@
-# Título do Projeto
+# Scripts de wireGuard
 
-Breve descrição do projeto, explicando sua finalidade e principais recursos.
+this project aims to create service scripts that can monitor your vpn wireguard.
+in my scenario I have a central wireguard vpn server, with two internet links in addition to approximately 70 clients that connect to this server through the wireguard vpn.
+this repository contains a module and a script that generates a service that can be installed on the remote computer to monitor the local vpn service and always be connected with my main office
 
 ## Instalação
 
-Descreva as etapas necessárias para instalar e configurar o projeto. Inclua requisitos de sistema, dependências e comandos de instalação.
+To install this script, just install the following libraries:
+- python -m pip install pyinstaller
+- python -m pip install pywin32-ctypes
+after installed, you need to clone the repository and make changes to the variables:
+-host=<remote host to monitor>
+-ipwg=<main wan public ip>
+-mainwg=<main wan dns name>
+-secdwg=<secondary wan dns name>
+-portawg=<port you use for your WireGuard>
+- pckeywg=<public key>
+- logfile="C:\Program Files\WireGuard\log_check-wggalpao.txt"
+to generate the exe:
+python -m PyInstaller --onefile ---hidden-import=win32timezone check_wggalpao_service.py
 
 ## Uso
 
