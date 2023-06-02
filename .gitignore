@@ -4,3 +4,4 @@ dist
 __pycache__
 checkwggalpaoprivate.py
 check_wggalpao_service.spec
+.gitignore
