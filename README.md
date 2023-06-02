@@ -6,25 +6,31 @@ this repository contains a module and a script that generates a service that can
 
 ## Instalação
 
-To install this script, just install the following libraries:
-- python -m pip install pyinstaller
-- python -m pip install pywin32-ctypes
+- To install this script, just install the following libraries:
+    - python -m pip install pyinstaller
+    - python -m pip install pywin32-ctypes
 
-after installed, you need to clone the repository and make changes to the variables:
-- host= < remote host to monitor >
-- ipwg= < main wan public ip >
-- mainwg= < main wan dns name >
-- secdwg= < secondary wan dns name >
-- portawg= < port you use for your WireGuard >
-- pckeywg= < public key >
-- logfile= < path to log file >
+- after installed, you need to clone the repository and make changes to the variables:
+    - host= < remote host to monitor >
+    - ipwg= < main wan public ip >
+    - mainwg= < main wan dns name >
+    - secdwg= < secondary wan dns name >
+    - portawg= < port you use for your WireGuard >
+    - pckeywg= < public key >
+    - logfile= < path to log file >
 
-to generate the exe:
-- python -m PyInstaller --onefile ---hidden-import=win32timezone check_wggalpao_service.py
+- to generate the exe:
+    - python -m PyInstaller --onefile ---hidden-import=win32timezone check_wggalpao_service.py
 
 ## Uso
 
-Forneça exemplos e instruções claras sobre como usar o projeto. Inclua exemplos de código, capturas de tela ou gifs animados para demonstrar o uso em ação.
+after generating the exe file, it must be copied to the machines that close the vpn with the wireguard server and installed as follows.
+
+- copy the file to the folder you want
+- open cmd with administrative permissions
+- walk to the folder where the exe is
+- file.exe install
+- file.exe start
 
 ## Recursos
 
@@ -86,7 +92,7 @@ Se necessário, você pode adicionar seções adicionais ao README para atender 
 
 # Índice 
 
-* [Título e Imagem de capa](#Título-e-Imagem-de-capa)
+* [Título e Imagem de capa](#Agradecimentos)
 * [Badges](#badges)
 * [Índice](#índice)
 * [Descrição do Projeto](#descrição-do-projeto)
