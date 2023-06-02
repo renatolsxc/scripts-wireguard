@@ -1,4 +1,4 @@
-# Scripts fo WireGuard
+# Scripts for WireGuard
 
 this project aims to create service scripts that can monitor your vpn wireguard.
 in my scenario I have a central wireguard vpn server, with two internet links in addition to approximately 70 clients that connect to this server through the wireguard vpn.
