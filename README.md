@@ -11,13 +11,13 @@ To install this script, just install the following libraries:
 - python -m pip install pywin32-ctypes
 
 after installed, you need to clone the repository and make changes to the variables:
-- host=<remote host to monitor>
-- ipwg=<main wan public ip>
-- mainwg=<main wan dns name>
-- secdwg=<secondary wan dns name>
-- portawg=<port you use for your WireGuard>
-- pckeywg=<public key>
-- logfile="C:\Program Files\WireGuard\log_check-wggalpao.txt"
+- host= < remote host to monitor >
+- ipwg= < main wan public ip >
+- mainwg= < main wan dns name >
+- secdwg= < secondary wan dns name >
+- portawg= < port you use for your WireGuard >
+- pckeywg= < public key >
+- logfile= < path to log file >
 
 to generate the exe:
 - python -m PyInstaller --onefile ---hidden-import=win32timezone check_wggalpao_service.py
