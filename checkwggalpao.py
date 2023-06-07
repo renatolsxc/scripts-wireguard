@@ -30,7 +30,7 @@ def verifica_op_atual():
         else:
             return 2
     except subprocess.CalledProcessError as e:
-        with open('c:\\status.txt', 'a') as file:
+        with open(checkwggalpaoprivate.logfile, 'a') as file:
             file.write(f'\nFALHA! - op')
         return 5
     
@@ -39,7 +39,7 @@ def install_wggalpao():
         outp = subprocess.run(('wireguard /installtunnelservice "C:\Program Files\WireGuard\Data\Configurations\wggalpao.conf.dpapi"'), capture_output=True, text=True)
         outlines = outp.stdout.splitlines()
     except subprocess.CalledProcessError as e:
-        with open('c:\\status.txt', 'a') as file:
+        with open(checkwggalpaoprivate.logfile, 'a') as file:
             file.write(f'\nFALHA! - {e.returncode}')
         return 5
 
@@ -53,7 +53,7 @@ def start_wggalpao():
         else:
             return False
     except subprocess.CalledProcessError as e:
-        with open('c:\\status.txt', 'a') as file:
+        with open(checkwggalpaoprivate.logfile, 'a') as file:
             file.write(f'\nFALHA! - {e.returncode}')
         return 5
 
@@ -87,7 +87,7 @@ def inicio():
     
     if result == 0:
         print("Monitoramento OK")
-        time.sleep(60)
+        return 1
     else:
         print("Monitoramento falhou na primeira tentativa. Aguardando 30 segundos.")
         time.sleep(30)
@@ -104,18 +104,24 @@ def inicio():
         
         if result == 0:
             print("Monitoramento OK na segunda tentativa.")
+            return 1
         else:
             print("Monitoramento falhou na segunda tentativa. Trocar.")
+            
             
             if operadora_atual == 1:
                 print("Trocar para operadora 2")
                 cmd_troca = "wg set wggalpao peer {checkwggalpaoprivate.pckeywg} endpoint {checkwggalpaoprivate.secdwg}:{checkwggalpaoprivate.portawg}"
                 subprocess.call(cmd_troca, shell=True)
                 time.sleep(10)
+                
             elif operadora_atual == 2:
                 print("Trocar para operadora 1")
                 cmd_troca = "wg set wggalpao peer {checkwggalpaoprivate.pckeywg} endpoint {checkwggalpaoprivate.mainwg}:{checkwggalpaoprivate.portawg}"
                 subprocess.call(cmd_troca, shell=True)
                 time.sleep(10)
+                
             else:
                 print("Comando Falhou")
+            
+            return 0

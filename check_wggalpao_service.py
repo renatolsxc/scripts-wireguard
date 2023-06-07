@@ -1,3 +1,4 @@
+import time
 import win32serviceutil
 import win32service
 import win32event
@@ -5,10 +6,15 @@ import servicemanager
 import socket
 import sys
 import checkwggalpao
+import zbxwggalpao
+import checkwggalpaoprivate
+
 
 class MyService(win32serviceutil.ServiceFramework):
     _svc_name_ = 'Check-WGGalpao'
     _svc_display_name_ = 'Check-WGGalpao'
+
+    logfile = checkwggalpaoprivate.logfile
 
     def __init__(self, args):
         win32serviceutil.ServiceFramework.__init__(self, args)
@@ -17,15 +23,15 @@ class MyService(win32serviceutil.ServiceFramework):
         self.is_running = True
 
     def SvcStop(self):
-        with open('c:\\status.txt', 'a') as file:
-            file.write(f'\nRecebi Stop!')
+        with open(checkwggalpaoprivate.logfile, 'a') as file:
+            file.write(f'\nRecebi Stop!\n')
         self.ReportServiceStatus(win32service.SERVICE_STOP_PENDING)
         win32event.SetEvent(self.hWaitStop)
         self.is_running = False
 
     def SvcDoRun(self):
-        with open('c:\\status.txt', 'a') as file:
-            file.write(f'\nRecebi Run!')
+        with open(checkwggalpaoprivate.logfile, 'a') as file:
+            file.write(f'\nRecebi Run!\n')
         servicemanager.LogMsg(servicemanager.EVENTLOG_INFORMATION_TYPE,
                               servicemanager.PYS_SERVICE_STARTED,
                               (self._svc_name_, ''))
@@ -33,15 +39,19 @@ class MyService(win32serviceutil.ServiceFramework):
 
     def main(self):
         # Coloque aqui o código principal do seu serviço
-        with open('c:\\status.txt', 'a') as file:
-            file.write(f'\nServiço em execução!')
+        with open(checkwggalpaoprivate.logfile, 'a') as file:
+            file.write(f'\nServiço em execução!\n')
         while self.is_running:
-            with open('c:\\status.txt', 'a') as file:
-                file.write(f'\nWhile!')
+            with open(checkwggalpaoprivate.logfile, 'a') as file:
+                file.write(f'\nWhile!\n')
             try:
-                checkwggalpao.inicio()
+                status=checkwggalpao.inicio()
+                if not zbxwggalpao.send(status):
+                    with open(checkwggalpaoprivate.logfile, 'a') as file:
+                        file.write(f'\nNao enviou para o ZBX\n')
+                time.sleep(60)
             except Exception as e:
-                with open('c:\\status.txt', 'a') as file:
+                with open(checkwggalpaoprivate.logfile, 'a') as file:
                     file.write(f'\nFALHA! - {e}')
             
             pass
