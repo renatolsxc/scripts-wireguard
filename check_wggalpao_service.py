@@ -46,9 +46,9 @@ class MyService(win32serviceutil.ServiceFramework):
                 file.write(f'\nWhile!\n')
             try:
                 status=checkwggalpao.inicio()
-                if not zbxwggalpao.send(status):
-                    with open(checkwggalpaoprivate.logfile, 'a') as file:
-                        file.write(f'\nNao enviou para o ZBX\n')
+                zbx = zbxwggalpao.send(status)
+                with open(checkwggalpaoprivate.logfile, 'a') as file:
+                    file.write(f'\nZBX: {zbx}\n')
                 time.sleep(60)
             except Exception as e:
                 with open(checkwggalpaoprivate.logfile, 'a') as file:

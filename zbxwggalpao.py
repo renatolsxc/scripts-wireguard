@@ -11,7 +11,7 @@ def send(valor):
 
     # Dados ue serão enviados
     hostname = platform.node()
-    hostname.upper()
+    hostname=hostname.upper()
     chave_unica_do_item = checkwggalpaoprivate.chave_unica_do_item
     
 
@@ -37,10 +37,10 @@ def send(valor):
         #print(f'\tChunk: {result.chunk}')
 
         if result.processed:
-            return True
+            return (f'TRUE: {hostname} ; {chave_unica_do_item} ; {valor}')
         #print(f'Métricas enviadas com sucesso. - {result.time}')
         else:
-            return False
+            return (f'FALSE: {hostname} ; {chave_unica_do_item} ; {valor}')
         #print(f'Falha ao enviar as métricas. - {result.time}')
 
     except Exception as e:
