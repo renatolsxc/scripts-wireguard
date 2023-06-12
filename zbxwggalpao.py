@@ -36,13 +36,18 @@ def send(valor):
         #print(f'\tTempo: {result.time}')
         #print(f'\tChunk: {result.chunk}')
 
-        if result.processed:
-            return (f'TRUE: {hostname} ; {chave_unica_do_item} ; {valor}')
-        #print(f'Métricas enviadas com sucesso. - {result.time}')
+        if not result.failed:
+            if result.processed:
+                return (f'TRUE: {hostname} ; {chave_unica_do_item} ; {valor}')
+            #print(f'Métricas enviadas com sucesso. - {result.time}')
+            else:
+                return (f'FALSE: {hostname} ; {chave_unica_do_item} ; {valor}')
+            #print(f'Falha ao enviar as métricas. - {result.time}')
         else:
-            return (f'FALSE: {hostname} ; {chave_unica_do_item} ; {valor}')
-        #print(f'Falha ao enviar as métricas. - {result.time}')
+            return "Falhou ZBX"
+
+
 
     except Exception as e:
         with open(checkwggalpaoprivate.logfile, 'a') as file:
-            file.write(f'\nFALHA! - {e}')
+            file.write(f'\nFALHA! - ZBX {e}')

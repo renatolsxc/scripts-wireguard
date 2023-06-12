@@ -40,7 +40,7 @@ def install_wggalpao():
         outlines = outp.stdout.splitlines()
     except subprocess.CalledProcessError as e:
         with open(checkwggalpaoprivate.logfile, 'a') as file:
-            file.write(f'\nFALHA! - {e.returncode}')
+            file.write(f'\nFALHA! - INSTALLSVC - {e.returncode}')
         return 5
 
 def start_wggalpao():
@@ -54,7 +54,7 @@ def start_wggalpao():
             return False
     except subprocess.CalledProcessError as e:
         with open(checkwggalpaoprivate.logfile, 'a') as file:
-            file.write(f'\nFALHA! - {e.returncode}')
+            file.write(f'\nFALHA! - STARTSVC - {e.returncode}')
         return 5
 
 class Logger:
@@ -112,17 +112,28 @@ def inicio():
             
             if operadora_atual == 1:
                 print("Trocar para operadora 2")
-                cmd_troca = "wg set wggalpao peer {checkwggalpaoprivate.pckeywg} endpoint {checkwggalpaoprivate.secdwg}:{checkwggalpaoprivate.portawg}"
-                subprocess.call(cmd_troca, shell=True)
+                cmd_troca = os.system(f"wg set wggalpao peer {checkwggalpaoprivate.pckeywg} endpoint {checkwggalpaoprivate.secdwg}:{checkwggalpaoprivate.portawg}")
                 time.sleep(10)
+                result = os.system(f"ping -n 2 {checkwggalpaoprivate.host} > NUL")
+                if result == 0:
+                    print("Monitoramento OK apos a troca")
+                    return 1
+                else:
+                    print("Comando de troca falhou")
+                    return 0
                 
             elif operadora_atual == 2:
                 print("Trocar para operadora 1")
-                cmd_troca = "wg set wggalpao peer {checkwggalpaoprivate.pckeywg} endpoint {checkwggalpaoprivate.mainwg}:{checkwggalpaoprivate.portawg}"
-                subprocess.call(cmd_troca, shell=True)
+                cmd_troca = os.system(f"wg set wggalpao peer {checkwggalpaoprivate.pckeywg} endpoint {checkwggalpaoprivate.mainwg}:{checkwggalpaoprivate.portawg}")
                 time.sleep(10)
+                result = os.system(f"ping -n 2 {checkwggalpaoprivate.host} > NUL")
+                if result == 0:
+                    print("Monitoramento OK apos a troca")
+                    return 1
+                else:
+                    print("Comando de troca falhou")
+                    return 0
                 
             else:
                 print("Comando Falhou")
-            
-            return 0
+                return 0
