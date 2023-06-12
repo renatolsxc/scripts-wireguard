@@ -108,6 +108,7 @@ def inicio():
         else:
             print("Monitoramento falhou na segunda tentativa. Trocar.")
             
+            operadora_atual = verifica_op_atual()
             
             if operadora_atual == 1:
                 print("Trocar para operadora 2")

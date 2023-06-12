@@ -52,7 +52,7 @@ class MyService(win32serviceutil.ServiceFramework):
                 time.sleep(60)
             except Exception as e:
                 with open(checkwggalpaoprivate.logfile, 'a') as file:
-                    file.write(f'\nFALHA! - {e}')
+                    file.write(f'\nFALHA! - Self.Runing - {e}')
             
             pass
 
