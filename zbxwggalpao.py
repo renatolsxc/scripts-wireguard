@@ -44,10 +44,8 @@ def send(valor):
                 return (f'FALSE: {hostname} ; {chave_unica_do_item} ; {valor}')
             #print(f'Falha ao enviar as métricas. - {result.time}')
         else:
-            return "Falhou ZBX"
-
-
-
+            return "Falhou ZBX - SEM TIMEOUT"
+        
     except Exception as e:
-        with open(checkwggalpaoprivate.logfile, 'a') as file:
-            file.write(f'\nFALHA! - ZBX {e}')
+        return "Falhou ZBX - EXCECAO" 
+        
