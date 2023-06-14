@@ -13,11 +13,13 @@ def send(valor):
     hostname = platform.node()
     hostname=hostname.upper()
     chave_unica_do_item = checkwggalpaoprivate.chave_unica_do_item
+    chave_operadora = checkwggalpaoprivate.chave_operadora
     
 
     # Cria uma lista de métricas ZabbixMetric
     metrics = [
-        ZabbixMetric(hostname,chave_unica_do_item,valor)
+        ZabbixMetric(hostname,chave_unica_do_item,valor[0]),
+        ZabbixMetric(hostname,chave_operadora,valor[1])
     ]
 
     #print(f"Hostname: {hostname}")

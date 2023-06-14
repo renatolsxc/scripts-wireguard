@@ -75,7 +75,6 @@ class Logger:
 
 def inicio():
     sys.stdout = Logger(checkwggalpaoprivate.logfile)
-    
     #while True:
 
     result = os.system(f"ping -n 2 {checkwggalpaoprivate.host} > NUL")
@@ -87,7 +86,7 @@ def inicio():
     
     if result == 0:
         print("Monitoramento OK")
-        return 1
+        return [1,operadora_atual]
     else:
         print("Monitoramento falhou na primeira tentativa. Aguardando 30 segundos.")
         time.sleep(30)
@@ -100,11 +99,12 @@ def inicio():
                 install_wggalpao()
 
         result = os.system(f"ping -n 2 {checkwggalpaoprivate.host} > NUL")
+        operadora_atual = verifica_op_atual()
         print(f"Operadora Atual: {operadora_atual}")
         
         if result == 0:
             print("Monitoramento OK na segunda tentativa.")
-            return 1
+            return [1,operadora_atual]
         else:
             print("Monitoramento falhou na segunda tentativa. Trocar.")
             
@@ -117,10 +117,10 @@ def inicio():
                 result = os.system(f"ping -n 2 {checkwggalpaoprivate.host} > NUL")
                 if result == 0:
                     print("Monitoramento OK apos a troca")
-                    return 1
+                    return [1,operadora_atual]
                 else:
                     print("Comando de troca falhou")
-                    return 0
+                    return [0,0]
                 
             elif operadora_atual == 2:
                 print("Trocar para operadora 1")
@@ -129,11 +129,13 @@ def inicio():
                 result = os.system(f"ping -n 2 {checkwggalpaoprivate.host} > NUL")
                 if result == 0:
                     print("Monitoramento OK apos a troca")
-                    return 1
+                    return [1,operadora_atual]
                 else:
                     print("Comando de troca falhou")
-                    return 0
+                    return [0,0]
                 
             else:
                 print("Comando Falhou")
-                return 0
+                return [0,0]
+
+

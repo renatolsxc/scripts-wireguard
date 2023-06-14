@@ -43,12 +43,12 @@ class MyService(win32serviceutil.ServiceFramework):
             file.write(f'\nServiço em execução!\n')
         while self.is_running:
             with open(checkwggalpaoprivate.logfile, 'a') as file:
-                file.write(f'\nWhile!\n')
+                file.write(f'While!\n')
             try:
                 status=checkwggalpao.inicio()
                 zbx = zbxwggalpao.send(status)
                 with open(checkwggalpaoprivate.logfile, 'a') as file:
-                    file.write(f'\nZBX: {zbx}\n')
+                    file.write(f'ZBX: {zbx}\n')
                 time.sleep(60)
             except Exception as e:
                 with open(checkwggalpaoprivate.logfile, 'a') as file:
