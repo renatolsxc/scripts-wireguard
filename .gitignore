@@ -5,3 +5,4 @@ __pycache__
 checkwggalpaoprivate.py
 check_wggalpao_service.spec
 .gitignore
+chkwgg.spec

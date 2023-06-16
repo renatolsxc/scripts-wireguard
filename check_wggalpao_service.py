@@ -1,3 +1,7 @@
+import datetime
+import os
+import shutil
+import subprocess
 import time
 import win32serviceutil
 import win32service
@@ -5,8 +9,6 @@ import win32event
 import servicemanager
 import socket
 import sys
-import checkwggalpao
-import zbxwggalpao
 import checkwggalpaoprivate
 
 
@@ -42,14 +44,30 @@ class MyService(win32serviceutil.ServiceFramework):
         with open(checkwggalpaoprivate.logfile, 'a') as file:
             file.write(f'\nServiço em execução!\n')
         while self.is_running:
-            with open(checkwggalpaoprivate.logfile, 'a') as file:
-                file.write(f'While!\n')
             try:
-                status=checkwggalpao.inicio()
-                zbx = zbxwggalpao.send(status)
+                if os.path.exists('c:\\Program Files\\WireGuard\\chkwggnew\\chkwgg.exe'):
+                    dia = datetime.date.today().strftime("%Y%m%d")
+
+                    with open(checkwggalpaoprivate.logfile, 'a') as file:
+                        file.write(f'EXISTE ATUALIZACAO!\n')
+                    
+                    arquivo_new = "c:\\Program Files\\WireGuard\\chkwggnew\\chkwgg.exe"
+                    arquivo_now = "c:\\Program Files\\WireGuard\\chkwgg.exe"
+                    arquivo_old = f'c:\\Program Files\\WireGuard\\chkwggnew\\chkwgg-{dia}.exe'
+
+                    # Fazer uma cópia do novo arquivo para um local temporário
+                    shutil.move(arquivo_now, arquivo_old)
+                    
+                    # Substituir o arquivo principal em uso pelo serviço
+                    shutil.move(arquivo_new, arquivo_now)
+                else:
+                    with open(checkwggalpaoprivate.logfile, 'a') as file:
+                        file.write(f'NAO EXISTE ATUALIZACAO!\n')
+
                 with open(checkwggalpaoprivate.logfile, 'a') as file:
-                    file.write(f'ZBX: {zbx}\n')
-                time.sleep(60)
+                    file.write(f'While!\n')
+                    subprocess.Popen(['c:\\Program Files\\WireGuard\\chkwgg.exe'])
+                    time.sleep(60)
             except Exception as e:
                 with open(checkwggalpaoprivate.logfile, 'a') as file:
                     file.write(f'\nFALHA! - Self.Runing - {e}')
